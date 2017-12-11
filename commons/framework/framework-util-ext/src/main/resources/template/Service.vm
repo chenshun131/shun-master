@@ -1,0 +1,15 @@
+package ${package_name}.api;
+
+import com.shun.framework.base.BaseService;
+import ${package_name}.dao.po.${model};
+import ${package_name}.dao.po.${model}Example;
+
+/**
+ * User: ${user} <p />
+ * Time: ${ctime} <p />
+ * Version: V1.0  <p />
+ * Description: ${model}Service接口 <p />
+ */
+public interface ${model2}Service extends BaseService<${model}, ${model}Example> {
+
+}

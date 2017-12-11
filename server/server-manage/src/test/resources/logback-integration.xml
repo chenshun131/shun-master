@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<included>
+    <substitutionProperty name="PROJECT_LOG_PATH" value="../logs/manage"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <file>${PROJECT_LOG_PATH}/manage.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${PROJECT_LOG_PATH}/%d{yyyy-MM-dd}/manage.%i.zip
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[%d{HH:mm:ss.SSS} %-5level %logger{10}[%method,%line] - %msg%n]]></pattern>
+        </encoder>
+    </appender>
+
+    <appender name="manageCoreRolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PROJECT_LOG_PATH}/manage-core.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${PROJECT_LOG_PATH}/%d{yyyy-MM-dd}/manage-core.%i.zip
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[%d{HH:mm:ss.SSS} %-5level %logger{10}[%method,%line] - %msg%n]]></pattern>
+        </encoder>
+    </appender>
+
+    <appender name="manageAOPRolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PROJECT_LOG_PATH}/manage-aop.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${PROJECT_LOG_PATH}/%d{yyyy-MM-dd}/manage-aop.%i.zip
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern><![CDATA[%d{HH:mm:ss.SSS} %-5level %logger{10}[%method,%line] - %msg%n]]></pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.shun.server.manage" level="INFO">
+        <appender-ref ref="manageCoreRolling"/>
+    </logger>
+
+    <!-- root -->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</included>

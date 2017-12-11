@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://code.alibabatech.com/schema/dubbo
+                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:/application.properties"/>
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="server-cms"/>
+
+    <!-- 注册中心配置，使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry file="./server-cms-dubbo.cache" address="${dubbo.registry.zookeeper.address}"/>
+
+    <!-- 订阅服务 -->
+    <dubbo:consumer check="false"/>
+
+    <!-- 生成远程服务代理 -->
+    <!-- 文章 -->
+    <dubbo:reference id="cmsArticleService" interface="com.shun.cms.api.CmsArticleService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 类目 -->
+    <dubbo:reference id="cmsCategoryService" interface="com.shun.cms.api.CmsCategoryService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 评论 -->
+    <dubbo:reference id="cmsCommentService" interface="com.shun.cms.api.CmsCommentService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 标签 -->
+    <dubbo:reference id="cmsTagService" interface="com.shun.cms.api.CmsTagService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 专题 -->
+    <dubbo:reference id="cmsTopicService" interface="com.shun.cms.api.CmsTopicService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 菜单 -->
+    <dubbo:reference id="cmsMenuService" interface="com.shun.cms.api.CmsMenuService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 单页 -->
+    <dubbo:reference id="cmsPageService" interface="com.shun.cms.api.CmsPageService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 设置 -->
+    <dubbo:reference id="cmsSettingService" interface="com.shun.cms.api.CmsSettingService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 系统 -->
+    <dubbo:reference id="cmsSystemService" interface="com.shun.cms.api.CmsSystemService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+</beans>

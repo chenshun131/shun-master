@@ -1,0 +1,11 @@
+package ${package_name}.core.dao.mapper;
+
+/**
+* User: ${user} <p />
+* Time: ${ctime} <p />
+* Version: V1.0  <p />
+* Description:  <p />
+*/
+public class ${model2}InfoMapper {
+
+}

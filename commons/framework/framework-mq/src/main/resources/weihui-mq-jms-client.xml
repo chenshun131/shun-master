@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="mqJndiTemplate" class="org.springframework.jndi.JndiTemplate">
+        <property name="environment">
+            <props>
+                <prop key="java.naming.factory.initial">
+                    ${weihuimq.java.naming.factory.initial}
+                </prop>
+                <prop key="java.naming.provider.url">
+                    ${weihuimq.java.naming.provider.url}
+                </prop>
+                <prop key="java.naming.security.principal">
+                    ${weihuimq.java.naming.security.principal}
+                </prop>
+                <prop key="java.naming.security.credentials">
+                    ${weihuimq.java.naming.security.credentials}
+                </prop>
+                <prop key="userName">${weihuimq.java.naming.security.principal}</prop>
+                <prop key="password">${weihuimq.java.naming.security.credentials}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mqJndiConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate" ref="mqJndiTemplate"/>
+        <property name="jndiName" value="ConnectionFactory"/>
+    </bean>
+
+    <bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+        <property name="connectionFactory" ref="mqJndiConnectionFactory"/>
+        <property name="idleTimeout" value="0"/>
+    </bean>
+
+    <bean id="destinationResolver" class="com.shun.framework.mq.jms.impl.DestinationResolverImpl"
+          factory-method="getInstance"/>
+
+    <bean id="jmsTemplate" class="com.shun.framework.mq.jms.impl.JmsTemplate">
+        <property name="connectionFactory" ref="pooledConnectionFactory"/>
+    </bean>
+
+    <bean id="mqAccessor" class="com.shun.framework.mq.jms.impl.JmsAccessorImpl">
+        <property name="jmsTemplate" ref="jmsTemplate"/>
+        <property name="destinationInfoFactory" ref="destinationInfoFactory"/>
+    </bean>
+
+    <bean id="mqService" class="com.shun.framework.mq.jms.impl.JmsService">
+        <property name="mqAccessor" ref="mqAccessor"/>
+    </bean>
+
+    <bean id="destinationInfoFactory" class="com.shun.framework.mq.jms.impl.DestinationInfoFactory">
+        <property name="destinationInfoService" ref="destinationInfoService"/>
+    </bean>
+
+    <bean id="destinationInfoService" class="org.springframework.jms.remoting.JmsInvokerProxyFactoryBean">
+        <property name="serviceInterface" value="com.shun.framework.mq.management.service.DestinationInfoService"/>
+        <property name="connectionFactory" ref="pooledConnectionFactory"/>
+        <property name="queueName" value="weihui.amo.destination"/>
+    </bean>
+</beans>

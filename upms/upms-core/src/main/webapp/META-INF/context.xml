@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiResourceLocking="false" privileged="true">
+    <Environment name="configLocation"
+                 value="file:/opt/app/config/ins/config-integration.properties"
+                 type="java.lang.String" override="false"/>
+    <Environment name="logbackFileLocation"
+                 value="/opt/app/config/ins/logback-integration.xml"
+                 type="java.lang.String" override="false"/>
+</Context>

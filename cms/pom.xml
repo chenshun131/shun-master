@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.shun</groupId>
+        <artifactId>shun</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>cms</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>cms</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+    </properties>
+
+    <modules>
+        <module>cms-dao</module>
+        <module>cms-api</module>
+        <module>cms-core</module>
+    </modules>
+
+    <!--
+    	为了标识配置项的来源,POM文件中的配置项统一以小写格式的POM开头.
+    	格式:
+    	pom.module{+}.{+}item{1}
+    	+   重复一次或多次    	{n} 重复n次    	module和item使用驼峰命名法进行命名
+    	示例:
+    	pom.jdbc.driver
+    	pom.jdbc.pool.maxActive
+    -->
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- JDBC CONFIG -->
+                <pom.jdbc.driver>com.mysql.jdbc.Driver</pom.jdbc.driver>
+                <pom.jdbc.url>jdbc:mysql://192.168.242.134:3306/zheng?useUnicode=true&amp;characterEncoding=UTF-8&amp;rewriteBatchedStatements=true&amp;useConfigs=maxPerformance&amp;useSSL=false</pom.jdbc.url>
+                <pom.jdbc.username>root</pom.jdbc.username>
+                <pom.jdbc.password>rWd3Hb+AzNg3IXF1b5vD+g==</pom.jdbc.password> <!-- 密码需要进行 AES加密 -->
+                <pom.jdbcAnother.driver>com.mysql.jdbc.Driver</pom.jdbcAnother.driver>
+                <pom.jdbcAnother.url>jdbc:mysql://192.168.242.134:3306/zheng?useUnicode=true&amp;characterEncoding=UTF-8&amp;rewriteBatchedStatements=true&amp;useConfigs=maxPerformance&amp;useSSL=false</pom.jdbcAnother.url>
+                <pom.jdbcAnother.username>root</pom.jdbcAnother.username>
+                <pom.jdbcAnother.password>rWd3Hb+AzNg3IXF1b5vD+g==</pom.jdbcAnother.password>
+                <!-- REDIS CONFIG -->
+                <pom.redis.hostname>192.168.242.134</pom.redis.hostname>
+                <pom.redis.port>6379</pom.redis.port>
+                <pom.redis.password>rWd3Hb+AzNg3IXF1b5vD+g==</pom.redis.password>
+                <pom.redis.pool.maxActive>500</pom.redis.pool.maxActive>
+                <pom.redis.pool.maxIdle>5</pom.redis.pool.maxIdle>
+                <pom.redis.pool.maxWaitMillis>10000</pom.redis.pool.maxWaitMillis>
+                <pom.redis.pool.timeout>10000</pom.redis.pool.timeout>
+                <!-- DOBBO CONFIG -->
+                <pom.dubbo.registry.zookeeper.address>zookeeper://192.168.242.134:2181</pom.dubbo.registry.zookeeper.address>
+                <pom.dubbo.protocol.port>20882</pom.dubbo.protocol.port>
+                <!-- ACTIVEMQ CONFIG -->
+                <pom.avtivemq.brokerurl>failover:(tcp://192.168.242.134:61616?wireFormat.maxInactivityDuration=0)</pom.avtivemq.brokerurl>
+            </properties>
+        </profile>
+
+        <!-- UAT -->
+        <profile>
+            <id>uat</id>
+            <properties>
+            </properties>
+        </profile>
+
+        <!-- 生产环境关键参数留空 -->
+        <profile>
+            <id>production</id>
+            <properties>
+            </properties>
+        </profile>
+    </profiles>
+</project>

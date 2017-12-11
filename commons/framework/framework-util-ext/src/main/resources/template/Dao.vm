@@ -1,0 +1,28 @@
+package ${package_name}.core.dao;
+
+import ${package_name}.dao.mapper.${model}Mapper;
+import ${package_name}.dao.po.${model};
+import ${package_name}.dao.po.${model}Example;
+import com.shun.framework.persistent.dao.GenericDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+* User: ${user} <p />
+* Time: ${ctime} <p />
+* Version: V1.0  <p />
+* Description:  <p />
+*/
+@Repository("${model3}Dao")
+public class ${model2}Dao extends GenericDao<${model}Example, ${model}, ${model}Mapper> {
+
+    @Override
+    @Autowired
+    public void setMapper(${model}Mapper ${model3}PoMapper) {
+        this.mapper = ${model3}PoMapper;
+    }
+
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://code.alibabatech.com/schema/dubbo
+                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="upms-core"/>
+
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry address="${dubbo.registry.zookeeper.address}" check="true" subscribe="true" register="true"/>
+
+    <!-- 用dubbo协议在XXXX端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- 系统 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsSystemService" ref="upmsSystemService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 组织 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsOrganizationService" ref="upmsOrganizationService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 用户组织 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsUserOrganizationService" ref="upmsUserOrganizationService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 用户 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsUserService" ref="upmsUserService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 角色 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsRoleService" ref="upmsRoleService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 权限 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsPermissionService" ref="upmsPermissionService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 角色权限 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsRolePermissionService" ref="upmsRolePermissionService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 用户权限 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsUserPermissionService" ref="upmsUserPermissionService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 用户角色 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsUserRoleService" ref="upmsUserRoleService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 操作日志 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsLogService" ref="upmsLogService"
+                   timeout="${dubbo.service.timeout}"/>
+
+    <!-- 接口服务 -->
+    <dubbo:service interface="com.shun.upms.api.UpmsApiService" ref="upmsApiService"
+                   timeout="${dubbo.service.timeout}"/>
+</beans>

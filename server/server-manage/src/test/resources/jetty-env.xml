@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure>
+    <New id="configLocation" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+        <Arg>configLocation</Arg>
+        <Arg type="java.lang.String">file:src/main/resources/applicaion.properties</Arg>
+        <Arg type="boolean">true</Arg>
+    </New>
+    <!--<New id="logbackFileLocation" class="org.eclipse.jetty.plus.jndi.EnvEntry">-->
+        <!--<Arg>logbackFileLocation</Arg>-->
+        <!--<Arg type="java.lang.String">src/test/resources/logback-integration.xml</Arg>-->
+        <!--<Arg type="boolean">true</Arg>-->
+    <!--</New>-->
+</Configure>

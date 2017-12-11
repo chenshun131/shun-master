@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://code.alibabatech.com/schema/dubbo
+                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:/application.properties"/>
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="server-manage"/>
+
+    <!-- 注册中心配置，使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry file="./server-manage-dubbo.cache" address="${dubbo.registry.zookeeper.address}" />
+
+    <!-- 订阅服务 -->
+    <dubbo:consumer check="false"/>
+
+    <!-- 生成远程服务代理 -->
+    <!-- 系统 -->
+    <dubbo:reference id="upmsSystemService" interface="com.shun.upms.api.UpmsSystemService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 组织 -->
+    <dubbo:reference id="upmsOrganizationService" interface="com.shun.upms.api.UpmsOrganizationService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 用户组织 -->
+    <dubbo:reference id="upmsUserOrganizationService" interface="com.shun.upms.api.UpmsUserOrganizationService"
+                     mock="true" timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 用户 -->
+    <dubbo:reference id="upmsUserService" interface="com.shun.upms.api.UpmsUserService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 角色 -->
+    <dubbo:reference id="upmsRoleService" interface="com.shun.upms.api.UpmsRoleService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 权限 -->
+    <dubbo:reference id="upmsPermissionService" interface="com.shun.upms.api.UpmsPermissionService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 角色权限 -->
+    <dubbo:reference id="upmsRolePermissionService" interface="com.shun.upms.api.UpmsRolePermissionService"
+                     mock="true" timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 用户权限 -->
+    <dubbo:reference id="upmsUserPermissionService" interface="com.shun.upms.api.UpmsUserPermissionService"
+                     mock="true" timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 用户角色 -->
+    <dubbo:reference id="upmsUserRoleService" interface="com.shun.upms.api.UpmsUserRoleService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 操作日志 -->
+    <dubbo:reference id="upmsLogService" interface="com.shun.upms.api.UpmsLogService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+    <!-- 接口服务 -->
+    <dubbo:reference id="upmsApiService" interface="com.shun.upms.api.UpmsApiService" mock="true"
+                     timeout="${dubbo.reference.timeout}" check="${dubbo.reference.check}"/>
+</beans>

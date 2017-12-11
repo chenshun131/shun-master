@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <display-name>
+        JCaptchaWebSample
+    </display-name>
+
+    <servlet>
+        <description></description>
+        <display-name>ImageCaptchaServlet</display-name>
+        <servlet-name>ImageCaptchaServlet</servlet-name>
+        <servlet-class>com.sample.jcaptcha.servlet.ImageCaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImageCaptchaServlet</servlet-name>
+        <url-pattern>/ImageCaptchaServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description></description>
+        <display-name>SoundCaptchaServlet</display-name>
+        <servlet-name>SoundCaptchaServlet</servlet-name>
+        <servlet-class>com.sample.jcaptcha.servlet.SoundCaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SoundCaptchaServlet</servlet-name>
+        <url-pattern>/SoundCaptchaServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description></description>
+        <display-name>CaptchaValidationServlet</display-name>
+        <servlet-name>CaptchaValidationServlet</servlet-name>
+        <servlet-class>com.sample.jcaptcha.servlet.CaptchaValidationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CaptchaValidationServlet</servlet-name>
+        <url-pattern>/CaptchaValidationServlet</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

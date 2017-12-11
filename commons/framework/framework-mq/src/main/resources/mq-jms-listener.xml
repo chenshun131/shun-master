@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="failoverService" class="com.shun.framework.mq.failover.impl.FailoverServiceImpl">
+        <property name="mqAccessor" ref="mqAccessor"/>
+    </bean>
+
+    <bean id="commonFailoverService" class="com.shun.framework.mq.failover.impl.CommonFailoverServiceImpl">
+        <property name="mqAccessor" ref="mqAccessor"/>
+    </bean>
+
+    <bean id="retryHandler" class="com.shun.framework.mq.handler.common.RetryMessageHandler">
+        <property name="failoverService" ref="failoverService"/>
+        <property name="mqAccessor" ref="mqAccessor"/>
+    </bean>
+
+    <bean id="messageHandlerFactory" class="com.shun.framework.mq.handler.impl.MessageHandlerFactoryImpl"
+          factory-method="getInstance"/>
+
+    <bean id="consumerJndiConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate" ref="mqJndiTemplate"/>
+        <property name="jndiName" value="ConnectionFactory"/>
+    </bean>
+
+    <bean id="consumerConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+        <property name="connectionFactory" ref="consumerJndiConnectionFactory"/>
+        <property name="idleTimeout" value="0"/>
+    </bean>
+</beans>
