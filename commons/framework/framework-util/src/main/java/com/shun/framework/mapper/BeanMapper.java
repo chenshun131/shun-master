@@ -4,7 +4,6 @@ import org.dozer.DozerBeanMapper;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ public class BeanMapper {
 
     private static DozerBeanMapper dozer = new DozerBeanMapper();
 
-    public BeanMapper() {
+    private BeanMapper() {
     }
 
     public static <T> T map(Object source, Class<T> destinationClass) {
@@ -25,10 +24,8 @@ public class BeanMapper {
     }
 
     public static <T> List<T> mapList(Collection<T> sourceList, Class<T> destinationClass) {
-        List<T> destinationList = new ArrayList();
-        Iterator var4 = sourceList.iterator();
-        while (var4.hasNext()) {
-            Object sourceObject = var4.next();
+        List<T> destinationList = new ArrayList<>();
+        for (Object sourceObject : sourceList) {
             T destinationObject = dozer.map(sourceObject, destinationClass);
             destinationList.add(destinationObject);
         }

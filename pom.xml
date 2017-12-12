@@ -633,7 +633,7 @@
             <dependency>
                 <groupId>com.octo.captcha</groupId>
                 <artifactId>jcaptcha</artifactId>
-                <version>jcaptcha</version>
+                <version>1.0</version>
             </dependency>
             <dependency>
                 <groupId>com.octo.captcha</groupId>

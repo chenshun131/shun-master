@@ -24,10 +24,12 @@ public class GenericLongPo implements GenericPo<Long> {
         this.id = id;
     }
 
+    @Override
     public Date getCreatedTime() {
         return createdTime;
     }
 
+    @Override
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
